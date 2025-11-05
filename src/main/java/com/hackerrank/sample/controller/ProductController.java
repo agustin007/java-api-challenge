@@ -1,7 +1,7 @@
 package com.hackerrank.sample.controller;
 
-import com.hackerrank.sample.model.Model;
-import com.hackerrank.sample.service.ModelService;
+import com.hackerrank.sample.model.Product;
+import com.hackerrank.sample.service.ProductService;
 import java.util.List;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-public class ModelController {
+public class ProductController {
     @Autowired
-    private ModelService modelService;
+    private ProductService productService;
 
     @GetMapping("/")
     @ResponseBody
     public String home() {
-        return "Default Java 21 Project Home Page";
+        return "API de Productos - Spring Boot";
     }
 
-    @RequestMapping(value = "/model", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewModel(@RequestBody @Valid Model model) {
-        modelService.createModel(model);
+    public void createNewProduct(@RequestBody @Valid Product product) {
+        productService.createProduct(product);
     }
 
     @RequestMapping(value = "/erase", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAllModels() {
-        modelService.deleteAllModels();
+    public void deleteAllProducts() {
+        productService.deleteAllProducts();
     }
 
-    @RequestMapping(value = "/model/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteModelById(@PathVariable Long id) {
-        modelService.deleteModelById(id);
+    public void deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
     }
 
-    @RequestMapping(value = "/model", method = RequestMethod.GET)
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<Model> getAllModels() {
-        return modelService.getAllModels();
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-    @RequestMapping(value = "/model/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Model getModelById(@PathVariable Long id) {
-        return modelService.getModelById(id);
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
     }
 }
